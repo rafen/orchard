@@ -1,4 +1,5 @@
 #define INDICATOR_LIGHT 13
+#define SCHEDULE_DEBUG 0
 
 int valvesStatus[CNT_VALVES];
 
@@ -11,7 +12,7 @@ void scheduleSetup(){
 }
 
 void scheduleTick(){
-    delay(2000);               // wait for a couple of seconds
+    //delay(2000);               // wait for a couple of seconds
     
     updateWeather();           // read weather data
 
@@ -47,9 +48,11 @@ void scheduleTick(){
         digitalWrite(valves[i], valvesStatus[i]);
     }
 
-    // Display Time and Weather
-    digitalClockDisplay();
-    Serial.print(" ");
-    digitalWeatherDisplay();
-    Serial.println();
+    #if SCHEDULE_DEBUG
+        // Display Time and Weather
+        digitalClockDisplay();
+        Serial.print(" ");
+        digitalWeatherDisplay();
+        Serial.println();
+    #endif
 }
