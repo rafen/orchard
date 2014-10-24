@@ -30,6 +30,9 @@ void printData(EthernetClient client){
     client.print("\"s\":");
     client.print(second());
     client.print(",");
+    client.print("\"manual\":");
+    client.print(manual);
+    client.print(",");
     client.print("\"valves\":[");    
     for(int i=0; i<CNT_VALVES; i++){
         client.print("{\"id\":");
