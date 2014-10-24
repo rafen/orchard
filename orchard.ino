@@ -13,6 +13,7 @@ int valves[CNT_VALVES];
 #include "Weather.h"
 #include "Alarms.h"
 #include "Schedule.h"
+#include "Commands.h"
 #include "Web.h"
 
 void setup() {    

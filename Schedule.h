@@ -1,14 +1,11 @@
-#define INDICATOR_LIGHT 13
 #define SCHEDULE_DEBUG 0
 
 int valvesStatus[CNT_VALVES];
+boolean manual = false;
 
 void scheduleSetup(){
     // initilize all alarms (see Alarms.h file)
     initAlarms();
-
-    // Indicator light to show an open valve
-    pinMode(INDICATOR_LIGHT, OUTPUT);
 }
 
 void scheduleTick(){
@@ -16,12 +13,15 @@ void scheduleTick(){
     
     updateWeather();           // read weather data
 
+    // do not operate if set to manual
+    if(manual){
+        return;   
+    }
+
     // Turn off all valves status
     for(int i=0; i<CNT_VALVES; i++){
         valvesStatus[i] = HIGH;
     }
-    // turn off indicator light
-    digitalWrite(INDICATOR_LIGHT, LOW);
     
     // Check wich valves to open
     for(int i=0; i<CNT_ALARMS; i++){
@@ -38,8 +38,6 @@ void scheduleTick(){
                 Serial.println(" is open.");
                // turn on valve of alarm
                valvesStatus[alarms[i].valve] = LOW;
-               // turn on indicator light
-               digitalWrite(INDICATOR_LIGHT, HIGH);
         }
     }
 

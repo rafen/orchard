@@ -88,15 +88,18 @@ void printData(EthernetClient client){
 void webLoop () {
   // listen for incoming clients
   EthernetClient client = server.available();
-
+  size_t size;
+  
   if (client) 
   {  
     while (client.connected()) 
     {
-      if (client.available()) 
+      if (size = client.available()) 
       {
-        char c = client.read();
-        Serial.print(c);
+          for(int i=0;i<size;i++){
+              char c = client.read();
+              processIncomingByte(c);
+          }
         printData(client);
         break;
       } 
