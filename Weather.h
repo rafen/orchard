@@ -1,7 +1,7 @@
 // Stract from DHT11 library test sketch for Arduino
 
 #define WEATHER_DEBUG_LEVEL 0
-#define DHT11PIN 2
+#define DHT11PIN 8
 dht11 weather;
 
 #ifdef WEATHER_INFO

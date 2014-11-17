@@ -22,11 +22,11 @@ void initAlarms(){
     
     /////////////////////
     // Setup for Alarm 0
-    alarms[0].from_hour = 16;
-    alarms[0].from_min = 7;
+    alarms[0].from_hour = 20;
+    alarms[0].from_min = 5;
    
-    alarms[0].to_hour = 16;
-    alarms[0].to_min = 45;
+    alarms[0].to_hour = 20;
+    alarms[0].to_min = 20;
    
     alarms[0].min_temp = 0;
     alarms[0].max_temp = 100;
@@ -34,22 +34,22 @@ void initAlarms(){
     alarms[0].min_hum = 0;
     alarms[0].max_hum = 100;
 
-    alarms[0].valve = 0;
+    alarms[0].valve = 2;
 
     /////////////////////
     // Setup for Alarm 1
-    alarms[1].from_hour = 16;
-    alarms[1].from_min = 00;
+    alarms[1].from_hour = 14;
+    alarms[1].from_min = 0;
     
-    alarms[1].to_hour = 16;
-    alarms[1].to_min = 55;
+    alarms[1].to_hour = 14;
+    alarms[1].to_min = 8;
     
-    alarms[1].min_temp = 23;
+    alarms[1].min_temp = 26;
     alarms[1].max_temp = 100;
 
-    alarms[1].min_hum = 70;
-    alarms[1].max_hum = 100;
+    alarms[1].min_hum = 0;
+    alarms[1].max_hum = 80;
 
-    alarms[1].valve = 1;
+    alarms[1].valve = 4;
 
 }

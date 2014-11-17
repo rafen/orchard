@@ -9,8 +9,12 @@ void scheduleSetup(){
 }
 
 void scheduleTick(){
-    //delay(2000);               // wait for a couple of seconds
     
+    // Execute this function once a second
+    if(millis() % 1000 != 0) {
+        return;
+    }
+        
     updateWeather();           // read weather data
 
     // do not operate if set to manual
@@ -27,7 +31,8 @@ void scheduleTick(){
     for(int i=0; i<CNT_ALARMS; i++){
         if(
             (hour() >= alarms[i].from_hour && hour() <= alarms[i].to_hour && // Check time
-             minute() >= alarms[i].from_min && minute() <= alarms[i].to_min) &&
+             (hour() < alarms[i].to_hour || minute() >= alarms[i].from_min && minute() <= alarms[i].to_min))
+             &&
             (weather.temperature >= alarms[i].min_temp && weather.temperature <= alarms[i].max_temp && // Check weather
              weather.humidity >= alarms[i].min_hum && weather.humidity <= alarms[i].max_hum)
         ){
@@ -43,8 +48,12 @@ void scheduleTick(){
 
     // Open the valves if needed
     for(int i=0; i<CNT_VALVES; i++){
-        digitalWrite(valves[i], valvesStatus[i]);
+        // Do not write the same value several times
+        if(digitalRead(valves[i]) != valvesStatus[i]){
+            digitalWrite(valves[i], valvesStatus[i]);
+        }
     }
+    Serial.println(valvesStatus[0]);
 
     #if SCHEDULE_DEBUG
         // Display Time and Weather
