@@ -4,38 +4,30 @@
 #include <Time.h>
 #include <Wire.h>
 #include <DS1307RTC.h>
-#include <dht11.h>
-#include <UIPEthernet.h> // Used for Ethernet
 
 int valves[CNT_VALVES];
 
 #include "OrchardClock.h"
-#include "Weather.h"
 #include "Alarms.h"
 #include "Schedule.h"
-#include "Commands.h"
-#include "Web.h"
 
-void setup() {    
+void setup() {
     // Init Valves
-    valves[0] = 4;    
-    valves[1] = 5;    
+    valves[0] = 11;
+    valves[1] = 10;
     for(int i=0; i<CNT_VALVES; i++){
         pinMode(valves[i], OUTPUT);
         pinMode(valves[i], HIGH);
     }
     Serial.begin(9600);
-    
+
     // Init Clock
     clockSetup();
-    
+
     // Init Schedule
     scheduleSetup();
-    
-    webSetup();
 }
 
 void loop() {
     scheduleTick();
-    webLoop();
 }

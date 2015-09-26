@@ -1,4 +1,4 @@
-#define SCHEDULE_DEBUG 0
+#define SCHEDULE_DEBUG 1
 
 int valvesStatus[CNT_VALVES];
 boolean manual = false;
@@ -14,9 +14,7 @@ void scheduleTick(){
     if(millis() % 1000 != 0) {
         return;
     }
-        
-    updateWeather();           // read weather data
-
+    
     // do not operate if set to manual
     if(manual){
         return;   
@@ -32,9 +30,6 @@ void scheduleTick(){
         if(
             (hour() >= alarms[i].from_hour && hour() <= alarms[i].to_hour && // Check time
              (hour() < alarms[i].to_hour || minute() >= alarms[i].from_min && minute() <= alarms[i].to_min))
-             &&
-            (weather.temperature >= alarms[i].min_temp && weather.temperature <= alarms[i].max_temp && // Check weather
-             weather.humidity >= alarms[i].min_hum && weather.humidity <= alarms[i].max_hum)
         ){
                 Serial.print("Alarm ");
                 Serial.print(i);
@@ -58,8 +53,6 @@ void scheduleTick(){
     #if SCHEDULE_DEBUG
         // Display Time and Weather
         digitalClockDisplay();
-        Serial.print(" ");
-        digitalWeatherDisplay();
         Serial.println();
     #endif
 }
